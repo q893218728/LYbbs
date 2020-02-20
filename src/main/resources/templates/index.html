@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
-
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -27,10 +27,12 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="https://github.com/login/oauth/authorize?client_id=2df2e14cfbc439aaa52a">登录</a></li>
-                <li class="dropdown">
+                <li id="login" th:if="${session.githubUser == null}">
+                    <a href="https://github.com/login/oauth/authorize?client_id=2df2e14cfbc439aaa52a&state=1">登录</a>
+                </li>
+                <li class="dropdown" th:if="${session.githubUser != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">我<span class="caret"></span></a>
+                       aria-expanded="false" th:text="${session.githubUser.getName()}"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">消息中心</a></li>
                         <li><a href="#">个人资料</a></li>
@@ -42,7 +44,27 @@
     </div>
 </nav>
 
-<script src="js/bootstrap.min.js" type="application/javascript"></script>
+<button onclick="login()">获取</button>
+<script>
+    $.ajaxSetup({
+        xhrFields: {
+            withCredentials: true
+        }
+    })
 
+    function login() {
+        $.ajax({
+            type: 'get',
+            url: 'http://localhost:8888/ajax',
+            success: function (data) {
+                data = data.data;
+                console.log(data)
+            },
+            error: function () {
+               alert("chucuo")
+            }
+        })
+    }
+</script>
 </body>
 </html>

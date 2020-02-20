@@ -52,6 +52,13 @@
             <version>1.2.62</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <!--代表指在编译期间-->
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 
