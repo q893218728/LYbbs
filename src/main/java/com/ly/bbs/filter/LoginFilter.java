@@ -19,10 +19,10 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest)servletRequest;
+        /*HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
-        if(uri.endsWith(".css") || uri.endsWith(".js") || uri.endsWith("index.html") || uri.endsWith("callback")){
+        if(uri.endsWith(".css") || uri.endsWith(".js")|| uri.endsWith("callback")){
             filterChain.doFilter(servletRequest,servletResponse);
         }else {
             GithubUser githubUser = (GithubUser) session.getAttribute("githubUser");
@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
             if(githubUser != null){
                 filterChain.doFilter(servletRequest,servletResponse);
             }
-        }
+        }*/
 
     }
 
