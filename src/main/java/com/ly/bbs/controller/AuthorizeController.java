@@ -38,7 +38,6 @@ public class AuthorizeController {
                            @RequestParam(name = "state") String state,
                            HttpServletRequest request, HttpServletResponse response) {
         //这里我们要接收github提供的code码，这个码是获得令牌的唯一方式。
-
         AccessToken accessToken = new AccessToken();
         accessToken.setCode(code);
         accessToken.setState(state);
