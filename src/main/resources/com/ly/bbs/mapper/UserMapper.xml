@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.bbs.mapper.UserMapper">
+    <resultMap id="userMap" type="com.ly.bbs.entity.User">
+        <id property="id" column="id"></id>
+        <result property="accontId" column="accont_id"></result>
+        <result property="name" column="name"/>
+        <result property="token" column="token"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="listUser" resultMap="userMap">
+      select <include refid="userList"/> from user
+    </select>
+
+    <insert id="insertUser">
+        insert into user (accont_Id,name,token,create_time,update_time) values(#{accontId},#{name},#{token},now(),now())
+    </insert>
+    <sql id="userList">
+        id,accont_id,name,token,create_time,update_time
+    </sql>
+</mapper>
