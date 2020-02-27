@@ -5,9 +5,12 @@
 <mapper namespace="com.ly.bbs.mapper.UserMapper">
     <resultMap id="userMap" type="com.ly.bbs.entity.User">
         <id property="id" column="id"></id>
-        <result property="accontId" column="accont_id"></result>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"/>
         <result property="name" column="name"/>
-        <result property="token" column="token"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="githubId" column="github_id"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
@@ -16,9 +19,26 @@
     </select>
 
     <insert id="insertUser">
-        insert into user (accont_Id,name,token,create_time,update_time) values(#{accontId},#{name},#{token},now(),now())
+        insert into user (username,password,name,email,phone,github_id,create_time,update_time) values(#{username},#{password},#{name},#{email},#{phone},#{githubId},now(),now())
     </insert>
     <sql id="userList">
-        id,accont_id,name,token,create_time,update_time
+        id,username,password,name,email,phone,github_id,create_time,update_time
     </sql>
+
+    <select id="checkGithubUser" resultType="int">
+        select count(1) from user where github_id = #{githubId}
+    </select>
+    <select id="checkUsername" resultType="int">
+        select count(1) from user where username = #{username}
+    </select>
+    <select id="checkEmail" resultType="int">
+        select count(1) from user where email = #{email}
+    </select>
+
+    <select id="checkPhone" resultType="int">
+        select count(1) from user where phone = #{phone}
+    </select>
+    <select id="selectByUsername" resultMap="userMap">
+        select <include refid="userList"/> from user where username = #{username}
+    </select>
 </mapper>

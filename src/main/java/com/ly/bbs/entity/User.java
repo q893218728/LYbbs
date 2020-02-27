@@ -5,14 +5,17 @@ package com.ly.bbs.entity;
 
 import lombok.Data;
 
-import java.util.Date;
 
 @Data
 public class User {
-    private String id;
-    private String accontId;
+    private Integer id;
+    private String username;
+    private String password;
     private String name;
-    private String token;
-    private Date createTime;
-    private Date updateTime;
+    private String githubId;
+    private String email;
+    private String phone;
+    private String createTime;
+    private String updateTime;
+
 }

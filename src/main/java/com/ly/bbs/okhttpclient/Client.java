@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
+import java.util.concurrent.TimeUnit;
 
 public enum Client{
     INSTANCE;
@@ -14,7 +15,7 @@ public enum Client{
             public boolean verify(String hostname, SSLSession session) {
                 return true;
             }
-        }).build();
+        }).readTimeout(20, TimeUnit.SECONDS).build();
     }
     public OkHttpClient getInstance() {
         return client;

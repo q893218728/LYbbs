@@ -19,6 +19,8 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        request.setCharacterEncoding("utf-8");
         /*HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();

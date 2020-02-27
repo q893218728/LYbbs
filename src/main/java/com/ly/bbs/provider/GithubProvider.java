@@ -3,7 +3,9 @@ package com.ly.bbs.provider;
 import com.alibaba.fastjson.JSON;
 import com.ly.bbs.entity.AccessToken;
 import com.ly.bbs.entity.GithubUser;
+import com.ly.bbs.entity.User;
 import com.ly.bbs.okhttpclient.Client;
+import com.mysql.cj.util.TimeUtil;
 import okhttp3.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;
@@ -80,16 +82,18 @@ public class GithubProvider {
 
     }
 
-    public GithubUser getUser(String accessToken) {
+    public User getUser(String accessToken) {
         Request request = new Request.Builder()
-                .url("https://api.github.com/user?access_token=" + accessToken)
+                .url("https://api.github.com/user?access_token=" + accessToken).addHeader("Connection", "keep-alive")
                 .build();
+
         try {
             Response response = Client.INSTANCE.getInstance().newCall(request).execute();
             String str = response.body().string();
+            System.out.println(str);
             //将github返回的JSON格式的用户信息，转成对象。
-            GithubUser githubUser = JSON.parseObject(str, GithubUser.class);
-            return githubUser;
+            User user = JSON.parseObject(str, User.class);
+            return user;
         } catch (IOException e) {
             e.printStackTrace();
         }

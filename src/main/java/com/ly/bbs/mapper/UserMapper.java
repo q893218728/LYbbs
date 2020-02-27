@@ -10,4 +10,9 @@ public interface UserMapper {
 
     List<User> listUser();
     int insertUser(User user);
+    int checkGithubUser(String githubId);
+    int checkUsername(String username);
+    int checkEmail(String email);
+    int checkPhone(String phone);
+    User selectByUsername(String username);
 }
