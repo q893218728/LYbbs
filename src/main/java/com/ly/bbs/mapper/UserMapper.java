@@ -15,4 +15,6 @@ public interface UserMapper {
     int checkEmail(String email);
     int checkPhone(String phone);
     User selectByUsername(String username);
+    User selectByGithubId(String githubId);
+    User selectById(Integer id);
 }

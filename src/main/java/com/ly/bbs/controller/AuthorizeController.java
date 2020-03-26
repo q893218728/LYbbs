@@ -59,9 +59,9 @@ public class AuthorizeController {
         System.out.println(accessToken);
         System.out.println(token);
         //通过token来获得用户的基本信息
-        System.out.println(2);
+
         User user = githubProvider.getUser(token);
-        System.out.println(3);
+
 
         if (user != null) {
             user.setGithubId(String.valueOf(user.getId()));
@@ -71,8 +71,10 @@ public class AuthorizeController {
             if (checkGithubUserVo.isSuccess()) {
                 userService.insertUser(user);
             }
+            ResultVO vo =  userService.selectByGithubId(user.getGithubId());
+            User user1 = (User)vo.getData();
 
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("user", user1);
             try {
                 System.out.println(user.getName());
                 response.sendRedirect("http://localhost:63343/bbsFrontend/index.html?_ijt=3dft5fr8utddurt3hdnaqsn9p0");

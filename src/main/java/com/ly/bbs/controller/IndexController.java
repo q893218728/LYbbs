@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,14 +24,15 @@ public class IndexController {
     @Autowired
     QuestionService questionService;
 
+
     @GetMapping("/ajax")
     public ResultVO ajax(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
-        System.out.println(user + "ajax");
         return ResultVO.success(user);
     }
     @GetMapping("/getQuestion")
-    public ResultVO getQuestion(){
-        return questionService.listQuestion();
+    public ResultVO getQuestion(@RequestParam(defaultValue = "1") Integer pageNum,
+                                @RequestParam(defaultValue = "10") Integer pageSize){
+        return questionService.listQuestion(pageNum,pageSize);
     }
 }

@@ -13,4 +13,5 @@ public interface UserService {
     ResultVO checkEmail(String email);
     ResultVO checkPhone(String phone);
     ResultVO login(String username,String password);
+    ResultVO selectByGithubId(String githubId);
 }

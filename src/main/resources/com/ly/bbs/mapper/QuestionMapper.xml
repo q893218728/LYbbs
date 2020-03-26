@@ -15,6 +15,7 @@
         <result property="likeCount" column="like_count"/>
         <result property="tag" column="tag"/>
     </resultMap>
+
     <insert id="insertQuestion" >
         insert into question (title,description,create_time,update_time,creator,tag) values (#{title},#{description},now(),now(),#{creator},#{tag})
     </insert>
@@ -24,4 +25,13 @@
     <sql id="all">
         id,title,description,create_time,update_time,creator,comment_count,view_count,like_count,tag
     </sql>
+    <select id="listQuestionByCreator" resultMap="questionMap">
+        select <include refid="all"/> from question where creator = #{id}
+    </select>
+    <select id="selectQuestionById" resultMap="questionMap">
+        select <include refid="all"/> from question where id = #{id}
+    </select>
+    <update id="updateLikeCount">
+        update question  set like_count=like_count+1 where id=#{id};
+    </update>
 </mapper>

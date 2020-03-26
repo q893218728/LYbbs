@@ -41,4 +41,10 @@
     <select id="selectByUsername" resultMap="userMap">
         select <include refid="userList"/> from user where username = #{username}
     </select>
+    <select id="selectByGithubId" resultType="com.ly.bbs.entity.User">
+        select <include refid="userList"/> from user where github_id = #{githubId}
+    </select>
+    <select id="selectById" resultMap="userMap">
+        select <include refid="userList"/> from user where id = #{id}
+    </select>
 </mapper>

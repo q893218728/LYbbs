@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface QuestionService {
      ResultVO insertQuestion(Question question);
-     ResultVO listQuestion();
+     ResultVO listQuestion(Integer pageNum,Integer pageSize);
+     ResultVO listQuestionByCreator(Integer pageNum,Integer pageSize,Integer id);
+     ResultVO getQuestionAndUser(Integer id);
+     ResultVO questionlike(Integer id);
 }
