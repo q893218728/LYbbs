@@ -47,4 +47,5 @@
     <select id="selectById" resultMap="userMap">
         select <include refid="userList"/> from user where id = #{id}
     </select>
+
 </mapper>

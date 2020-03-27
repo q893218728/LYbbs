@@ -55,9 +55,8 @@ public class AuthorizeController {
         accessToken.setRedirect_uri(redirectUri);
         //调用将code，clien_id，clientSecret，redirect_uri传给github的方法，来获得github给我们的一个令牌token
         System.out.println(1);
-        String token = githubProvider.getAccesstoken(accessToken);
-        System.out.println(accessToken);
-        System.out.println(token);
+        String token = githubProvider.getAccessToken(accessToken);
+        System.out.println(32132131);
         //通过token来获得用户的基本信息
 
         User user = githubProvider.getUser(token);

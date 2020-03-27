@@ -15,7 +15,7 @@ public enum Client{
             public boolean verify(String hostname, SSLSession session) {
                 return true;
             }
-        }).readTimeout(20, TimeUnit.SECONDS).build();
+        }).readTimeout(100, TimeUnit.SECONDS).build();
     }
     public OkHttpClient getInstance() {
         return client;

@@ -12,4 +12,7 @@ public interface QuestionMapper {
     /**
      * 点赞的方法*/
     Integer updateLikeCount(Integer id);
+    Integer updateViewCount(Integer id);
+    /*更新问题的时间*/
+    Integer updateTime(Integer id);
 }

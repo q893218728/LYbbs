@@ -95,6 +95,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ResultVO selectById(Integer id) {
+        User user = userMapper.selectById(id);
+        return ResultVO.success(user);
+    }
+
+    @Override
     public ResultVO insertUser(User user) {
         //检测用户名是否存在
         ResultVO checkUsernameVo = checkUsername(user.getUsername());

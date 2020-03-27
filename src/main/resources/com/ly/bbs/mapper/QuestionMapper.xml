@@ -20,7 +20,7 @@
         insert into question (title,description,create_time,update_time,creator,tag) values (#{title},#{description},now(),now(),#{creator},#{tag})
     </insert>
     <select id="listQuestion" resultMap="questionMap">
-        select <include refid="all"/> from question
+        select <include refid="all"/> from question order by update_time desc
     </select>
     <sql id="all">
         id,title,description,create_time,update_time,creator,comment_count,view_count,like_count,tag
@@ -33,5 +33,11 @@
     </select>
     <update id="updateLikeCount">
         update question  set like_count=like_count+1 where id=#{id};
+    </update>
+    <update id="updateViewCount">
+        update question set view_count = view_count+1 where id = #{id}
+    </update>
+    <update id="updateTime">
+        update question set update_time = now() where id=#{id}
     </update>
 </mapper>

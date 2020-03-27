@@ -22,6 +22,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public ResultVO insertQuestion(Question question) {
         questionMapper.insertQuestion(question);
+
         return ResultVO.success("发布成功");
     }
 
@@ -55,6 +56,12 @@ public class QuestionServiceImpl implements QuestionService {
     public ResultVO questionlike(Integer id) {
         questionMapper.updateLikeCount(id);
         return ResultVO.success("点赞成功");
+    }
+
+    @Override
+    public ResultVO incView(Integer id) {
+        questionMapper.updateViewCount(id);
+        return ResultVO.success("阅读数成功+1");
     }
 
 

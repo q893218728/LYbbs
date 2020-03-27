@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.bbs.mapper.CommentMapper">
+    <resultMap id="commentMap" type="com.ly.bbs.entity.Comment">
+        <id property="id" column="id"></id>
+        <result property="parentId" column="parent_id"/>
+        <result property="type" column="type"/>
+        <result property="commentator" column="commentator"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="comment" column="comment"/>
+    </resultMap>
+    <insert id="insertComment">
+        insert into comment (parent_id,type,commentator,create_time,update_time,comment) values(#{parentId},#{type},#{commentator},now(),now(),#{comment})
+    </insert>
+    <select id="listCommentByParentId" resultMap="commentMap">
+        select <include refid="all"/> from comment where parent_id=#{parentId} order by update_time desc
+    </select>
+    <sql id="all">
+        id,parent_id,type,commentator,create_time,update_time,like_count,comment
+    </sql>
+    <select id="listTwoCommentByParentId" resultMap="commentMap">
+        select <include refid="all"/> from comment where parent_id=#{parentId} and type IN (2,3) order by update_time ;
+    </select>
+    <update id="updateTime">
+        update comment set update_time = now() where id = #{id}
+    </update>
+   <select id="selectCountById" resultType="java.lang.Integer">
+       select count(*) from comment where parent_id = #{id} and type=2;
+   </select>
+
+</mapper>

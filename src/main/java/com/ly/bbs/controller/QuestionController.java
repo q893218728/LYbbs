@@ -21,6 +21,9 @@ public class QuestionController {
     }
     @PostMapping("/question")
     public ResultVO question(Integer id){
+        //增加阅读数
+         questionService.incView(id);
+         //返回问题和发起者的信息
         return questionService.getQuestionAndUser(id);
     }
     @GetMapping("/question/like")

@@ -11,4 +11,5 @@ public interface QuestionService {
      ResultVO listQuestionByCreator(Integer pageNum,Integer pageSize,Integer id);
      ResultVO getQuestionAndUser(Integer id);
      ResultVO questionlike(Integer id);
+     ResultVO incView(Integer id);
 }
