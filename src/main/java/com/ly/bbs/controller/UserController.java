@@ -34,6 +34,7 @@ public class UserController {
     public ResultVO login(String username, String password, HttpServletRequest request){
       ResultVO resultVO =  userService.login(username,password);
       if(resultVO.isSuccess()){
+
           request.getSession().setAttribute("user",resultVO.getData());
       }
       return resultVO;

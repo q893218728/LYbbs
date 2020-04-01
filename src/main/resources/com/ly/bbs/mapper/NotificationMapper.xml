@@ -23,4 +23,10 @@
     <sql id="all">
         id,notifier,receiver,outerId,type,status,create_time
     </sql>
+    <delete id="deleteById">
+        delete from notification where id=#{id}
+    </delete>
+    <select id="selectCountByReceiver" resultType="java.lang.Integer">
+        select count(*) from notification where receiver=#{receiver}
+    </select>
 </mapper>

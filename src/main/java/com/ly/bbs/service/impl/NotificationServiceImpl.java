@@ -46,21 +46,45 @@ public class NotificationServiceImpl implements NotificationService {
             receiveUser = userMapper.selectById(notification.getReceiver());
             notificationVO.setNoticeUser(noticeUser);
             notificationVO.setReceiveUser(receiveUser);
-
+            notificationVO.setId(notification.getId());
             //如果这个是回复问题的通知，通过outerId去问题列表查
             if(notification.getType()== NotificationTypeEnum.REPLY_QUESTION.getType()){
                  notificationVO.setQuestionId(notification.getOuterId());
+                 notificationVO.setType(NotificationTypeEnum.REPLY_QUESTION.getType());
                  Question question = questionMapper.selectQuestionById(notification.getOuterId());
                   message = question.getTitle();
             }
             if(notification.getType()==NotificationTypeEnum.REPLY_COMMENT.getType()){
                 Comment comment = commentMapper.selectById(notification.getOuterId());
                 notificationVO.setQuestionId(comment.getParentId());
+                notificationVO.setType(NotificationTypeEnum.REPLY_COMMENT.getType());
                  message = comment.getComment();
             }
             notificationVO.setMessage(message);
             notificationVOS.add(notificationVO);
         }
         return ResultVO.success(notificationVOS);
+    }
+
+    /**
+     * 根据id删除通知
+     * @param id
+     * @return
+     */
+    @Override
+    public ResultVO deleteById(Integer id) {
+        notificationMapper.deleteById(id);
+        return ResultVO.success();
+    }
+
+    /**
+     * 统计某人的通知个数
+     * @param receiver
+     * @return
+     */
+    @Override
+    public ResultVO selectCountByReceiver(Integer receiver) {
+        Integer count = notificationMapper.selectCountByReceiver(receiver);
+        return ResultVO.success(count);
     }
 }

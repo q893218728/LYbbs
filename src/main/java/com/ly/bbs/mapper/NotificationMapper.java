@@ -7,4 +7,6 @@ import java.util.List;
 public interface NotificationMapper {
     Integer insertNotify(Notification notification);
     List<Notification> listByReceiver(Integer receiver);
+    Integer deleteById(Integer id);
+    Integer selectCountByReceiver(Integer receiver);
 }

@@ -19,4 +19,12 @@ public class NotificationController {
 
         return notificationService.listByReceiver(receiver);
     }
+    @PostMapping("/deleteNotification")
+    public ResultVO deletenotificationById(Integer id){
+      return notificationService.deleteById(id);
+    }
+    @PostMapping("/selectCount")
+    public  ResultVO selectCountByReceiver(Integer receiver){
+        return notificationService.selectCountByReceiver(receiver);
+    }
 }

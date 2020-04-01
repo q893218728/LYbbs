@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
         if(uri.endsWith(".css") || uri.endsWith(".js")|| uri.endsWith("callback") || uri.endsWith("ajax")||uri.endsWith("getQuestion")||uri.endsWith("question")
-        ||uri.endsWith("commentList")||uri.endsWith("login")||uri.endsWith("register")||uri.endsWith("listByTag")){
+        ||uri.endsWith("commentList")||uri.endsWith("login")||uri.endsWith("register")||uri.endsWith("listByTag")||uri.endsWith("search")){
             filterChain.doFilter(servletRequest,servletResponse);
         }else {
             User user = (User) session.getAttribute("user");
@@ -41,7 +41,6 @@ public class LoginFilter implements Filter {
                 response.sendRedirect("http://localhost:9999/loginAlert");
             }
             if(user != null){
-                System.out.println("放行了");
                 filterChain.doFilter(servletRequest,servletResponse);
             }
         }

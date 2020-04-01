@@ -8,4 +8,6 @@ import java.util.List;
 public interface NotificationService {
     ResultVO insertNotify(Notification notification);
     ResultVO listByReceiver(Integer receiver);
+    ResultVO deleteById(Integer id);
+    ResultVO selectCountByReceiver(Integer receiver);
 }

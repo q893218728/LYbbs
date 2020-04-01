@@ -43,4 +43,7 @@
     <select id="selectQuestionByTag" resultMap="questionMap">
         select <include refid="all"/> from question where tag like concat ('%',#{tag},'%') and id!= #{questionId} order by view_count desc limit 0,10;
     </select>
+    <select id="listQuestionBySearch" resultMap="questionMap">
+        select <include refid="all"/> from question where title like concat('%',#{searchStr},'%')
+    </select>
 </mapper>

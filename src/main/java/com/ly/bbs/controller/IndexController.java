@@ -65,4 +65,10 @@ public class IndexController {
     public ResultVO loginAlert(){
         return ResultVO.error("请先登录");
     }
+    @PostMapping("/search")
+    public ResultVO search(String searchStr,@RequestParam(defaultValue = "1") Integer pageNum,
+                           @RequestParam(defaultValue = "10") Integer pageSize){
+
+        return questionService.listQuestionBySearch(searchStr,pageNum,pageSize);
+    }
 }

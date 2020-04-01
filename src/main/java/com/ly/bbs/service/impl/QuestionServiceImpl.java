@@ -70,5 +70,13 @@ public class QuestionServiceImpl implements QuestionService {
        return ResultVO.success(questionList);
     }
 
+    @Override
+    public ResultVO listQuestionBySearch(String searchStr,Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Question> questionList = questionMapper.listQuestionBySearch(searchStr);
+        PageInfo<Question> pageInfo = new PageInfo<>(questionList);
+        return ResultVO.success(pageInfo);
+    }
+
 
 }

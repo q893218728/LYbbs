@@ -59,4 +59,5 @@ public interface QuestionService {
       */
      //
      ResultVO listQuestionByTag(String tag,Integer questionId);
+     ResultVO listQuestionBySearch(String searchStr,Integer pageNum,Integer pageSize);
 }

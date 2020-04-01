@@ -86,6 +86,11 @@
               <groupId>org.springframework.boot</groupId>
               <artifactId>spring-boot-starter-jdbc</artifactId>
           </dependency>-->
+        <dependency>
+            <groupId>cn.ucloud.ufile</groupId>
+            <artifactId>ufile-client-java</artifactId>
+            <version>2.4.2</version>
+        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
