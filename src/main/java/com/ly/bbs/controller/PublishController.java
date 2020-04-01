@@ -22,6 +22,13 @@ import javax.validation.Valid;
 public class PublishController {
     @Autowired
     QuestionService questionService;
+
+    /**
+     * 发布问题的方法
+     * @param questionFrom
+     * @param bs
+     * @return
+     */
     @PostMapping("/publish")
     public ResultVO publish(@Valid QuestionFrom questionFrom, BindingResult bs){
         System.out.println(1111);
@@ -30,7 +37,6 @@ public class PublishController {
         }
         Question question = new Question();
         BeanUtils.copyProperties(questionFrom,question);
-        System.out.println(222222);
         return  questionService.insertQuestion(question);
     }
 }

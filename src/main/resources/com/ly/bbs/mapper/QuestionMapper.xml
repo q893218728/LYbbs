@@ -40,4 +40,7 @@
     <update id="updateTime">
         update question set update_time = now() where id=#{id}
     </update>
+    <select id="selectQuestionByTag" resultMap="questionMap">
+        select <include refid="all"/> from question where tag like concat ('%',#{tag},'%') and id!= #{questionId} order by view_count desc limit 0,10;
+    </select>
 </mapper>

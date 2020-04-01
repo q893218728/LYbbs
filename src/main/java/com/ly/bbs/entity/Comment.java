@@ -16,7 +16,8 @@ public class Comment {
     private User user;
     //下级评论的数量，对一级评论无用，对二级评论有用
     private Integer count;
-
+    private String nickname;
+    private Integer receiver;
 
 
 

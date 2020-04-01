@@ -16,6 +16,13 @@ import javax.validation.Valid;
 public class CommentController {
     @Autowired
     CommentService commentService;
+
+    /**
+     * 发表一个评论，作出正则校验
+     * @param commentFrom
+     * @param bs
+     * @return
+     */
     @PostMapping("/comment")
     public ResultVO recive(@Valid CommentFrom commentFrom, BindingResult bs){
         if(bs.hasErrors()){
@@ -27,6 +34,14 @@ public class CommentController {
         }
 
     }
+
+    /**
+     * 根据问题id列出一级评论
+     * 根据一级评论id，列出二级评论
+     * @param parentId
+     * @param type
+     * @return
+     */
     @PostMapping("/commentList")
     public ResultVO commentList(Integer parentId,Integer type){
 

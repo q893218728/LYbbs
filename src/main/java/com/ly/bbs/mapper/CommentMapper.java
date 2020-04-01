@@ -11,5 +11,6 @@ public interface CommentMapper {
     Integer updateTime(Integer id);
     /*根据一级评论的id查找属于它的二级评论的数量*/
     Integer selectCountById(Integer id);
+    Comment selectById(Integer id);
 
 }

@@ -64,5 +64,11 @@ public class QuestionServiceImpl implements QuestionService {
         return ResultVO.success("阅读数成功+1");
     }
 
+    @Override
+    public ResultVO listQuestionByTag(String tag,Integer quesitonId) {
+       List<Question> questionList =  questionMapper.selectQuestionByTag(tag,quesitonId);
+       return ResultVO.success(questionList);
+    }
+
 
 }

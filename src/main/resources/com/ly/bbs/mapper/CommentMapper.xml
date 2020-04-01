@@ -12,15 +12,16 @@
         <result property="updateTime" column="update_time"/>
         <result property="likeCount" column="like_count"/>
         <result property="comment" column="comment"/>
+        <result property="receiver" column="receiver"/>
     </resultMap>
     <insert id="insertComment">
-        insert into comment (parent_id,type,commentator,create_time,update_time,comment) values(#{parentId},#{type},#{commentator},now(),now(),#{comment})
+        insert into comment (parent_id,type,commentator,create_time,update_time,comment,nickname,receiver) values(#{parentId},#{type},#{commentator},now(),now(),#{comment},#{nickname},#{receiver})
     </insert>
     <select id="listCommentByParentId" resultMap="commentMap">
         select <include refid="all"/> from comment where parent_id=#{parentId} order by update_time desc
     </select>
     <sql id="all">
-        id,parent_id,type,commentator,create_time,update_time,like_count,comment
+        id,parent_id,type,commentator,create_time,update_time,like_count,comment,nickname
     </sql>
     <select id="listTwoCommentByParentId" resultMap="commentMap">
         select <include refid="all"/> from comment where parent_id=#{parentId} and type IN (2,3) order by update_time ;
@@ -31,5 +32,7 @@
    <select id="selectCountById" resultType="java.lang.Integer">
        select count(*) from comment where parent_id = #{id} and type=2;
    </select>
-
+   <select id="selectById" resultMap="commentMap">
+       select <include refid="all"/> from comment where id=#{id}
+   </select>
 </mapper>

@@ -24,20 +24,43 @@ public class IndexController {
     @Autowired
     UserService userService;
 
+    /**
+     * 用来判断用户在不在
+     * @param request
+     * @return
+     */
     @GetMapping("/ajax")
     public ResultVO ajax(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
         return ResultVO.success(user);
     }
+
+    /**
+     * 列出主页的所有问题，分页
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/getQuestion")
     public ResultVO getQuestion(@RequestParam(defaultValue = "1") Integer pageNum,
                                 @RequestParam(defaultValue = "10") Integer pageSize){
         return questionService.listQuestion(pageNum,pageSize);
     }
+
+    /**
+     * 根据id得到当前登陆者信息
+     * @param id
+     * @return
+     */
     @PostMapping("/getLoginUser")
     public ResultVO getLoginUser(Integer id){
         return userService.selectById(id);
     }
+
+    /**
+     * 供过滤器使用
+     * @return
+     */
     @PostMapping("/loginAlert")
     public ResultVO loginAlert(){
         return ResultVO.error("请先登录");

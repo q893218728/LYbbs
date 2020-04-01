@@ -15,12 +15,8 @@ public class CommentFrom {
     private String updateTime;
     @Pattern(regexp = "^[\\s\\S]{10,}$",message = "回复内容请大于10个字")
     private String comment;
-    private String belong;
     //下级评论的数量，对一级评论无用，对二级评论有用
     private Integer count;
-
-    private List threeCommentList;
-    private Integer answerId;
-    //回复者，三级评论用
-    private User answer;
+    private String nickname;
+    private Integer receiver;
 }

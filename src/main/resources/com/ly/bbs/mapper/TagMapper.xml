@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ly.bbs.mapper.TagMapper">
+    <resultMap id="tagMap" type="com.ly.bbs.entity.Tag">
+        <id property="id" column="id"></id>
+        <result property="name" column="tag_name"/>
+    </resultMap>
+    <select id="listTag" resultMap="tagMap">
+        select <include refid="all"/> from tag
+    </select>
+    <sql id="all">
+    id,tag_name
+    </sql>
+
+</mapper>

@@ -15,4 +15,5 @@ public interface QuestionMapper {
     Integer updateViewCount(Integer id);
     /*更新问题的时间*/
     Integer updateTime(Integer id);
+    List<Question> selectQuestionByTag(String tag,Integer questionId);
 }
