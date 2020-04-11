@@ -17,4 +17,7 @@ public interface UserService {
     ResultVO selectByGithubId(String githubId);
     ResultVO selectById(Integer id);
     ResultVO updateUser(HttpServletRequest request,User user);
+    ResultVO updateUserPassword(String password,String newPassword,Integer id);
+    ResultVO updateUserPasswordNoUser(String username,String password);
+    ResultVO sendEmail(String email);
 }

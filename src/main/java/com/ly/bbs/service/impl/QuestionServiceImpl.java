@@ -90,5 +90,18 @@ public class QuestionServiceImpl implements QuestionService {
         return ResultVO.success(pageInfo);
     }
 
+    @Override
+    public ResultVO getQuestionByTag(String tag,Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Question> questionList = questionMapper.listQuestionByHotTag(tag);
+        for (Question question : questionList) {
+            User user = userMapper.selectById(question.getCreator());
+            question.setUser(user);
+        }
+        PageInfo<Question> pageInfo = new PageInfo<>(questionList);
+        return ResultVO.success(pageInfo);
+
+    }
+
 
 }

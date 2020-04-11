@@ -61,4 +61,10 @@ public class QuestionController {
     public ResultVO dianZan(Integer id){
         return questionService.questionlike(id);
     }
+
+    @PostMapping("/getQuestionByHotTag")
+    public ResultVO getQuestionByTag(String tag,@RequestParam(defaultValue = "1") Integer pageNum,
+                                     @RequestParam(defaultValue = "10") Integer pageSize){
+           return questionService.getQuestionByTag(tag,pageNum,pageSize);
+    }
 }

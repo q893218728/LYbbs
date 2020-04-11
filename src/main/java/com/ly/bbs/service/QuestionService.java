@@ -59,5 +59,20 @@ public interface QuestionService {
       */
      //
      ResultVO listQuestionByTag(String tag,Integer questionId);
+
+     /**
+      * 根据搜索列出问题
+      * @param searchStr
+      * @param pageNum
+      * @param pageSize
+      * @return
+      */
      ResultVO listQuestionBySearch(String searchStr,Integer pageNum,Integer pageSize);
+
+     /**
+      * 根据主页点击标签列出问题
+      * @param tag
+      * @return
+      */
+     ResultVO getQuestionByTag(String tag,Integer pageNum,Integer pageSize);
 }

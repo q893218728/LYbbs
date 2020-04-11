@@ -31,7 +31,7 @@ public class PublishController {
      */
     @PostMapping("/publish")
     public ResultVO publish(@Valid QuestionFrom questionFrom, BindingResult bs){
-        System.out.println(1111);
+        System.out.println(questionFrom);
         if(bs.hasErrors()){
             return ResultVO.error(bs.getFieldError().getDefaultMessage());
         }

@@ -19,4 +19,6 @@ public interface UserMapper {
     User selectById(Integer id);
     int updateUserImg(User user);
     int updateUser(User user);
+    int updateUserPassword(User user);
+    int updatePasswordNoUser(User user);
 }

@@ -55,4 +55,10 @@
    <update id="updateUser">
        update user set autograph = #{autograph} where id=#{id}
    </update>
+    <update id="updateUserPassword">
+        update user set password = #{password} where id=#{id}
+    </update>
+    <update id="updatePasswordNoUser">
+        update user set password = #{password} where username = #{username}
+    </update>
 </mapper>

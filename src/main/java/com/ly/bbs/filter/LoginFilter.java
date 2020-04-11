@@ -32,7 +32,8 @@ public class LoginFilter implements Filter {
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
         if(uri.endsWith(".css") || uri.endsWith(".js")|| uri.endsWith("callback") || uri.endsWith("ajax")||uri.endsWith("getQuestion")||uri.endsWith("question")
-        ||uri.endsWith("commentList")||uri.endsWith("login")||uri.endsWith("register")||uri.endsWith("listByTag")||uri.endsWith("search")){
+        ||uri.endsWith("commentList")||uri.endsWith("login")||uri.endsWith("register")||uri.endsWith("listByTag")||uri.endsWith("search")||uri.endsWith("hotTag")||uri.endsWith("getQuestionByHotTag")
+        ||uri.endsWith("sendEmail")||uri.endsWith("updatePasswordNoUser")){
             filterChain.doFilter(servletRequest,servletResponse);
         }else {
             User user = (User) session.getAttribute("user");

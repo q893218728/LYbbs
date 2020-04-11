@@ -46,8 +46,19 @@ public class UserController {
     }
     @PostMapping("/userUpdate")
     public ResultVO userUpdate(HttpServletRequest request,User user){
-        System.out.println(user);
         userService.updateUser(request,user);
         return ResultVO.success("更改用户成功");
+    }
+    @PostMapping("/user/updatePassword")
+    public ResultVO updatePassword(String password,String newPassword,Integer id){
+        return userService.updateUserPassword(password,newPassword,id);
+    }
+    @PostMapping("/user/sendEmail")
+    public ResultVO sendEmail(String email){
+        return userService.sendEmail(email);
+    }
+    @PostMapping("/user/updatePasswordNoUser")
+    public ResultVO updatePasswordNoUser(String username,String password){
+           return userService.updateUserPasswordNoUser(username,password);
     }
 }
