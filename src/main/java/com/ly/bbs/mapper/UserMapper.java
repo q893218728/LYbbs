@@ -17,4 +17,6 @@ public interface UserMapper {
     User selectByUsername(String username);
     User selectByGithubId(String githubId);
     User selectById(Integer id);
+    int updateUserImg(User user);
+    int updateUser(User user);
 }

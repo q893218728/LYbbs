@@ -32,10 +32,14 @@ public class CommentServiceImpl implements CommentService {
     public ResultVO insertComment(Comment comment) {
 
 
-        /*不管回复几级评论，这个问题都更新时间*/
-        questionMapper.updateTime(comment.getParentId());
+
+
         //回复了一个一级评论
         if (comment.getType() == 1) {
+            //这个问题更新时间
+            questionMapper.updateTime(comment.getParentId());
+            //更新问题的回复数量
+            questionMapper.updateCommentCount(comment.getParentId());
             //插入一级评论
             commentMapper.insertComment(comment);
             //创建通知
@@ -45,9 +49,16 @@ public class CommentServiceImpl implements CommentService {
 
         }
         if (comment.getType() == 2) {
-
-            //更新时间
+            //这个问题也要更新时间,得到二级评论的parentId是一级评论的id。
+            Integer parentId = comment.getParentId();
+            //得到这个一级评论，然后根据一级评论的parentId更新问题时间
+            Comment comment1 = commentMapper.selectById(parentId);
+            questionMapper.updateTime(comment1.getParentId());
+            //更新问题的回复数量
+            questionMapper.updateCommentCount(comment1.getParentId());
+            //更新一级评论的时间
             commentMapper.updateTime(comment.getParentId());
+
             //插入评论
             commentMapper.insertComment(comment);
             //创建通知
@@ -56,6 +67,8 @@ public class CommentServiceImpl implements CommentService {
             notificationMapper.insertNotify(notification);
 
         }
+        //更新回复数
+
 
         return ResultVO.success("添加成功");
     }

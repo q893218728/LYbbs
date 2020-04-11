@@ -3,6 +3,7 @@ package com.ly.bbs.service;
 import com.ly.bbs.entity.User;
 import com.ly.bbs.vo.ResultVO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface UserService {
@@ -15,4 +16,5 @@ public interface UserService {
     ResultVO login(String username,String password);
     ResultVO selectByGithubId(String githubId);
     ResultVO selectById(Integer id);
+    ResultVO updateUser(HttpServletRequest request,User user);
 }

@@ -10,6 +10,8 @@ import com.ly.bbs.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -98,6 +100,17 @@ public class UserServiceImpl implements UserService {
     public ResultVO selectById(Integer id) {
         User user = userMapper.selectById(id);
         return ResultVO.success(user);
+    }
+
+    @Override
+    public ResultVO updateUser(HttpServletRequest request, User user) {
+        userMapper.updateUser(user);
+        User user1 = userMapper.selectById(user.getId());
+        HttpSession session = request.getSession();
+        session.setAttribute("user",user1);
+        //完成之后我们应该更改一下session中存在的用户，因为此时只是数据库变了。session中的用户没变，而我经常用到。所以给他改过来
+
+        return ResultVO.success();
     }
 
     @Override

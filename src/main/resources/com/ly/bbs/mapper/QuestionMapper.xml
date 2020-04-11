@@ -46,4 +46,7 @@
     <select id="listQuestionBySearch" resultMap="questionMap">
         select <include refid="all"/> from question where title like concat('%',#{searchStr},'%')
     </select>
+    <update id="updateCommentCount">
+        update question set comment_count = comment_count+1 where id=#{id}
+    </update>
 </mapper>

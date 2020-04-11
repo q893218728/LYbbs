@@ -34,7 +34,7 @@ public class UserController {
     public ResultVO login(String username, String password, HttpServletRequest request){
       ResultVO resultVO =  userService.login(username,password);
       if(resultVO.isSuccess()){
-
+          System.out.println(123);
           request.getSession().setAttribute("user",resultVO.getData());
       }
       return resultVO;
@@ -43,5 +43,11 @@ public class UserController {
     public ResultVO logout(HttpServletRequest request){
         request.getSession().removeAttribute("user");
         return ResultVO.success("成功删除");
+    }
+    @PostMapping("/userUpdate")
+    public ResultVO userUpdate(HttpServletRequest request,User user){
+        System.out.println(user);
+        userService.updateUser(request,user);
+        return ResultVO.success("更改用户成功");
     }
 }

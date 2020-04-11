@@ -17,4 +17,6 @@ public interface QuestionMapper {
     Integer updateTime(Integer id);
     List<Question> selectQuestionByTag(String tag,Integer questionId);
     List<Question> listQuestionBySearch(String searchStr);
+    //增加id增加这个问题的一条评论数
+    Integer updateCommentCount(Integer id);
 }

@@ -32,6 +32,7 @@ public class IndexController {
     @GetMapping("/ajax")
     public ResultVO ajax(HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
+
         return ResultVO.success(user);
     }
 

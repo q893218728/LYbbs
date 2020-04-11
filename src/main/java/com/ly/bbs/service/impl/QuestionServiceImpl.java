@@ -30,6 +30,10 @@ public class QuestionServiceImpl implements QuestionService {
     public ResultVO listQuestion(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<Question> questionList = questionMapper.listQuestion();
+        for (Question question : questionList) {
+            User user = userMapper.selectById(question.getCreator());
+            question.setUser(user);
+        }
         PageInfo<Question> pageInfo = new PageInfo<>(questionList);
 
         return ResultVO.success(pageInfo);
@@ -40,6 +44,10 @@ public class QuestionServiceImpl implements QuestionService {
     public ResultVO listQuestionByCreator(Integer pageNum, Integer pageSize, Integer id) {
         PageHelper.startPage(pageNum,pageSize);
         List<Question> questionList = questionMapper.listQuestionByCreator(id);
+        for (Question question : questionList) {
+            User user = userMapper.selectById(id);
+            question.setUser(user);
+        }
         PageInfo<Question> pageInfo = new PageInfo<>(questionList);
         return ResultVO.success(pageInfo);
     }
@@ -74,6 +82,10 @@ public class QuestionServiceImpl implements QuestionService {
     public ResultVO listQuestionBySearch(String searchStr,Integer pageNum,Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<Question> questionList = questionMapper.listQuestionBySearch(searchStr);
+        for (Question question : questionList) {
+            User user = userMapper.selectById(question.getCreator());
+            question.setUser(user);
+        }
         PageInfo<Question> pageInfo = new PageInfo<>(questionList);
         return ResultVO.success(pageInfo);
     }

@@ -17,5 +17,7 @@ public class User {
     private String phone;
     private String createTime;
     private String updateTime;
+    private String autograph;
+    private String headImg;
 
 }

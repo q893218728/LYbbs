@@ -13,6 +13,8 @@
         <result property="githubId" column="github_id"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
+        <result property="autograph" column="autograph"/>
+        <result property="headImg" column="head_img"/>
     </resultMap>
     <select id="listUser" resultMap="userMap">
       select <include refid="userList"/> from user
@@ -22,7 +24,7 @@
         insert into user (username,password,name,email,phone,github_id,create_time,update_time) values(#{username},#{password},#{name},#{email},#{phone},#{githubId},now(),now())
     </insert>
     <sql id="userList">
-        id,username,password,name,email,phone,github_id,create_time,update_time
+        id,username,password,name,email,phone,github_id,create_time,update_time,autograph,head_img
     </sql>
 
     <select id="checkGithubUser" resultType="int">
@@ -47,5 +49,10 @@
     <select id="selectById" resultMap="userMap">
         select <include refid="userList"/> from user where id = #{id}
     </select>
-
+    <update id="updateUserImg">
+        update user set head_img = #{headImg} where id=#{id}
+    </update>
+   <update id="updateUser">
+       update user set autograph = #{autograph} where id=#{id}
+   </update>
 </mapper>
