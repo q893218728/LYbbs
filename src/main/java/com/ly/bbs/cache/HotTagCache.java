@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
 @Component
 @Data
 public class HotTagCache {
-    private Integer size=13;
+    private Integer size=14;
     private Integer topN=5;
     /**
      * 这个Map 前面存标签名，后面存权重

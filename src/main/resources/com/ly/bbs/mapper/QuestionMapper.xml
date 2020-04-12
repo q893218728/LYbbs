@@ -20,7 +20,7 @@
         insert into question (title,description,create_time,update_time,creator,tag) values (#{title},#{description},now(),now(),#{creator},#{tag})
     </insert>
     <select id="listQuestion" resultMap="questionMap">
-        select <include refid="all"/> from question order by update_time desc
+        select <include refid="all"/> from question where creator!=41 order by update_time desc
     </select>
     <sql id="all">
         id,title,description,create_time,update_time,creator,comment_count,view_count,like_count,tag
@@ -52,4 +52,8 @@
     <update id="updateCommentCount">
         update question set comment_count = comment_count+1 where id=#{id}
     </update>
+    <select id="listYoungReport" resultMap="questionMap">
+        select <include refid="all"/> from question where creator=41 order by create_time desc limit 0,5;;
+    </select>
+
 </mapper>

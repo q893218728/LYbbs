@@ -61,8 +61,8 @@ public class HotTagTasks {
                 }
             }
 
-
         }
+
 
 
         hotTagList = hotTagCache.updateHotTags(prioritiesMap);

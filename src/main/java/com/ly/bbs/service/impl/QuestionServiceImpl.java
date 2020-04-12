@@ -103,5 +103,15 @@ public class QuestionServiceImpl implements QuestionService {
 
     }
 
+    @Override
+    public ResultVO listYoungReport() {
+        List<Question> questionList = questionMapper.listYoungReport();
+        User user = userMapper.selectById(41);
+        for (Question question : questionList) {
+            question.setUser(user);
+        }
+        return ResultVO.success(questionList);
+    }
+
 
 }

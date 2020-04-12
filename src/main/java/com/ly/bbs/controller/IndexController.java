@@ -72,4 +72,8 @@ public class IndexController {
 
         return questionService.listQuestionBySearch(searchStr,pageNum,pageSize);
     }
+    @PostMapping("/listYoungReport")
+    public ResultVO listYoungReport(){
+        return  questionService.listYoungReport();
+    }
 }

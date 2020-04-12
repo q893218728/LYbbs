@@ -33,13 +33,13 @@ public class LoginFilter implements Filter {
         String uri = request.getRequestURI();
         if(uri.endsWith(".css") || uri.endsWith(".js")|| uri.endsWith("callback") || uri.endsWith("ajax")||uri.endsWith("getQuestion")||uri.endsWith("question")
         ||uri.endsWith("commentList")||uri.endsWith("login")||uri.endsWith("register")||uri.endsWith("listByTag")||uri.endsWith("search")||uri.endsWith("hotTag")||uri.endsWith("getQuestionByHotTag")
-        ||uri.endsWith("sendEmail")||uri.endsWith("updatePasswordNoUser")){
+        ||uri.endsWith("sendEmail")||uri.endsWith("updatePasswordNoUser")||uri.endsWith("listYoungReport")){
             filterChain.doFilter(servletRequest,servletResponse);
         }else {
             User user = (User) session.getAttribute("user");
             if(user == null){
                    //Todo 滚回登录页面
-                response.sendRedirect("http://localhost:9999/loginAlert");
+                response.sendRedirect("http://39.97.170.253:9999/loginAlert");
             }
             if(user != null){
                 filterChain.doFilter(servletRequest,servletResponse);

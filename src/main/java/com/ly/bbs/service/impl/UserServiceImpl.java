@@ -149,11 +149,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultVO sendEmail(String email) {
+        System.out.println(email);
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo("614714303@qq.com");
+        message.setTo(email);
         message.setSubject("筑青春IT交流社区");
         message.setText("请在以下网址更改您的密码 http://localhost:63343/bbsFrontend/update.html");
-        message.setFrom(email);
+        message.setFrom("614714303@qq.com");
         javaMailSender.send(message);
         return ResultVO.success();
     }

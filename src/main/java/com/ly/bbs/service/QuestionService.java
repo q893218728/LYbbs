@@ -75,4 +75,5 @@ public interface QuestionService {
       * @return
       */
      ResultVO getQuestionByTag(String tag,Integer pageNum,Integer pageSize);
+     ResultVO listYoungReport();
 }

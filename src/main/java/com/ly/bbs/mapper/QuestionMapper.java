@@ -20,4 +20,5 @@ public interface QuestionMapper {
     //增加id增加这个问题的一条评论数
     Integer updateCommentCount(Integer id);
     List<Question> listQuestionByHotTag(String tag);
+    List<Question> listYoungReport();
 }
