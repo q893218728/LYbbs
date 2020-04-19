@@ -21,7 +21,7 @@
     </select>
 
     <insert id="insertUser">
-        insert into user (username,password,name,email,phone,github_id,create_time,update_time) values(#{username},#{password},#{name},#{email},#{phone},#{githubId},now(),now())
+        insert into user (username,password,name,email,phone,github_id,create_time,update_time,head_img) values(#{username},#{password},#{name},#{email},#{phone},#{githubId},now(),now(),#{headImg})
     </insert>
     <sql id="userList">
         id,username,password,name,email,phone,github_id,create_time,update_time,autograph,head_img
@@ -43,7 +43,7 @@
     <select id="selectByUsername" resultMap="userMap">
         select <include refid="userList"/> from user where username = #{username}
     </select>
-    <select id="selectByGithubId" resultType="com.ly.bbs.entity.User">
+    <select id="selectByGithubId" resultMap="userMap">
         select <include refid="userList"/> from user where github_id = #{githubId}
     </select>
     <select id="selectById" resultMap="userMap">

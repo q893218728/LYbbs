@@ -54,7 +54,7 @@ public class UcloudProvider {
 
             if(response != null && response.getRetCode() == 0){
                 String url = UfileClient.object(objectAuthorization,config)
-                        .getDownloadUrlFromPrivateBucket(generatedFileName,buildyoung,24*60*60)//一天有效
+                        .getDownloadUrlFromPrivateBucket(generatedFileName,buildyoung,24*60*60*180)//180天有效
                         .createUrl();
                 return url;
             }

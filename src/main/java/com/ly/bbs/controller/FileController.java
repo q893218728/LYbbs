@@ -31,6 +31,7 @@ public class FileController {
             file.setSuccess(1);
             file.setMessage("成功");
             file.setUrl(fileName);
+            //这里我们返回markdown一个文件，markdown会解析这个文件的url作为编辑器中内容，最后提交到数据库
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,6 +49,7 @@ public class FileController {
             user.setHeadImg(fileName);
             //更改头像
             userMapper.updateUserImg(user);
+            System.out.println(fileName);
         } catch (IOException e) {
             e.printStackTrace();
         }

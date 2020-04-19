@@ -149,14 +149,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultVO sendEmail(String email) {
-        System.out.println(email);
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email);
-        message.setSubject("筑青春IT交流社区");
-        message.setText("请在以下网址更改您的密码 http://localhost:63343/bbsFrontend/update.html");
-        message.setFrom("614714303@qq.com");
-        javaMailSender.send(message);
+        new Thread(){
+            @Override
+            public void run(){
+                System.out.println(email);
+                SimpleMailMessage message = new SimpleMailMessage();
+                message.setTo(email);
+                message.setSubject("筑青春IT交流社区");
+                message.setText("请在以下网址更改您的密码 http://39.97.170.253/update.html");
+                message.setFrom("614714303@qq.com");
+                javaMailSender.send(message);
+
+            }
+        }.start();
         return ResultVO.success();
+
     }
 
     @Override
@@ -177,7 +184,7 @@ public class UserServiceImpl implements UserService {
         }
         //对密码进行md5加密
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
-
+        user.setHeadImg("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=390947329,3335162149&fm=26&gp=0.jpg");
         int count = userMapper.insertUser(user);
         if (count == 0) {
             return ResultVO.error(ResponseCodeEnum.ERROR.getStatus(), "注册失败");

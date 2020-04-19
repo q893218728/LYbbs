@@ -2,6 +2,7 @@ package com.ly.bbs.provider;
 
 import com.alibaba.fastjson.JSON;
 import com.ly.bbs.entity.AccessToken;
+import com.ly.bbs.entity.GitUser;
 import com.ly.bbs.entity.GithubUser;
 import com.ly.bbs.entity.User;
 import com.ly.bbs.okhttpclient.Client;
@@ -15,6 +16,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -96,7 +98,13 @@ public class GithubProvider {
         try {
             Response response = client.newCall(request).execute();
             String str = response.body().string();
-            User user = JSON.parseObject(str, User.class);
+
+            GitUser gitUser = JSON.parseObject(str, GitUser.class);
+            User user = new User();
+            BeanUtils.copyProperties(gitUser,user);
+            user.setHeadImg(gitUser.getAvatar_url());
+            user.setEmail("github用户不显示邮箱");
+            user.setPhone("github用户不显示电话");
             return user;
         }catch (IOException e) {
             e.printStackTrace();

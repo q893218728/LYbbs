@@ -62,28 +62,30 @@ public class AuthorizeController {
 
         User user = githubProvider.getUser(token);
 
-
+        System.out.println(user);
         if (user != null) {
             user.setGithubId(String.valueOf(user.getId()));
             user.setId(null);
+            System.out.println(user);
             ResultVO checkGithubUserVo = userService.checkGithubUser(user.getGithubId());
 
             if (checkGithubUserVo.isSuccess()) {
+
                 userService.insertUser(user);
+
             }
             ResultVO vo =  userService.selectByGithubId(user.getGithubId());
             User user1 = (User)vo.getData();
-
+            System.out.println(user1);
             request.getSession().setAttribute("user", user1);
             try {
-                System.out.println(user.getName());
-                response.sendRedirect("http://localhost:63343/bbsFrontend/index.html?_ijt=3dft5fr8utddurt3hdnaqsn9p0");
+                response.sendRedirect("http://39.97.170.253");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                response.sendRedirect("http://localhost:63343/bbsFrontend/index.html?_ijt=3dft5fr8utddurt3hdnaqsn9p0");
+                response.sendRedirect("http://39.97.170.253");
             } catch (IOException e) {
                 e.printStackTrace();
             }

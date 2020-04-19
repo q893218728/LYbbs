@@ -53,7 +53,7 @@
         update question set comment_count = comment_count+1 where id=#{id}
     </update>
     <select id="listYoungReport" resultMap="questionMap">
-        select <include refid="all"/> from question where creator=41 order by create_time desc limit 0,5;;
+        select <include refid="all"/> from question where creator=41 order by create_time desc limit 0,5;
     </select>
 
 </mapper>

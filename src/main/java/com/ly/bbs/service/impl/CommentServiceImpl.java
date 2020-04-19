@@ -42,10 +42,15 @@ public class CommentServiceImpl implements CommentService {
             questionMapper.updateCommentCount(comment.getParentId());
             //插入一级评论
             commentMapper.insertComment(comment);
-            //创建通知
-            Notification notification = createNotify(comment);
+            Question question = questionMapper.selectQuestionById(comment.getParentId());
+
             //插入通知
-            notificationMapper.insertNotify(notification);
+            if(comment.getCommentator()!=question.getCreator()){
+                //创建通知
+                Notification notification = createNotify(comment);
+                notificationMapper.insertNotify(notification);
+            }
+
 
         }
         if (comment.getType() == 2) {
@@ -61,10 +66,13 @@ public class CommentServiceImpl implements CommentService {
 
             //插入评论
             commentMapper.insertComment(comment);
-            //创建通知
-            Notification notification = createNotify(comment);
-            //插入通知
-            notificationMapper.insertNotify(notification);
+            if(comment.getCommentator()!=comment1.getCommentator()){
+                //创建通知
+                Notification notification = createNotify(comment);
+                //插入通知
+                notificationMapper.insertNotify(notification);
+            }
+
 
         }
         //更新回复数
@@ -109,26 +117,34 @@ public class CommentServiceImpl implements CommentService {
         Notification notification = new Notification();
         if(comment.getType()==1){
             //通知
-            notification.setNotifier(comment.getCommentator());//通知者就是评论的创建者
-            notification.setType(NotificationTypeEnum.REPLY_QUESTION.getType());
-            notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
-
             Integer parentId = comment.getParentId();//对于一个一级评论来说，parentId就是问题的id
             Question question = questionMapper.selectQuestionById(parentId);
-            notification.setOuterId(comment.getParentId());
-            notification.setReceiver(question.getCreator());
+            //当问题的创建者不是评论的发起者时才创建
+
+                notification.setNotifier(comment.getCommentator());//通知者就是评论的创建者
+                notification.setType(NotificationTypeEnum.REPLY_QUESTION.getType());
+                notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+
+
+                notification.setOuterId(comment.getParentId());
+                notification.setReceiver(question.getCreator());
+
+
 
         }
         if(comment.getType()==2){
+            //通知者和评论者不能是一个人
 
-            //对于二级评论，通知者是这条评论的创建者
-            notification.setNotifier(comment.getCommentator());
-            //对于二级评论，接受者是二级评论里的接收者
-            notification.setReceiver(comment.getReceiver());
-            //外键应该是一级评论的id
-            notification.setOuterId(comment.getParentId());
-            notification.setType(NotificationTypeEnum.REPLY_COMMENT.getType());
-            notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+                //对于二级评论，通知者是这条评论的创建者
+                notification.setNotifier(comment.getCommentator());
+                //对于二级评论，接受者是二级评论里的接收者
+                notification.setReceiver(comment.getReceiver());
+                //外键应该是一级评论的id
+                notification.setOuterId(comment.getParentId());
+                notification.setType(NotificationTypeEnum.REPLY_COMMENT.getType());
+                notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+
+
         }
         return notification;
 

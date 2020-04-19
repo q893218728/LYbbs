@@ -30,7 +30,7 @@ public class HotTagTasks {
         return hotTagList;
     }
 
-    @Scheduled(fixedRate = 10000000)
+    @Scheduled(cron = "0 0 2 * * ?") //秒 分钟 小时 天 月 星期几 后面加年份
     public void hotTagSchedule(){
 
         Map<String,Integer> prioritiesMap = hotTagCache.getTags();

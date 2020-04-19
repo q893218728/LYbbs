@@ -1,13 +1,9 @@
 package com.ly.bbs.entity;
 
-
-
-
 import lombok.Data;
 
-
 @Data
-public class User {
+public class GitUser {
     private Integer id;
     private String username;
     private String password;
@@ -18,7 +14,5 @@ public class User {
     private String createTime;
     private String updateTime;
     private String autograph;
-    private String headImg;
-
-
+    private String avatar_url;
 }
